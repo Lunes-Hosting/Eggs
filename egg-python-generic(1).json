@@ -1,0 +1,48 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2024-09-07T13:34:26-06:00",
+    "name": "Python Generic",
+    "author": "parker@parkervcp.com",
+    "description": "A Generic Python Egg for Pterodactyl\r\n\r\nTested with: https:\/\/github.com\/Ispira\/pixel-bot",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/parkervcp\/yolks:python_3.11": "ghcr.io\/parkervcp\/yolks:python_3.11",
+        "ghcr.io\/parkervcp\/yolks:python_3.10": "ghcr.io\/parkervcp\/yolks:python_3.10",
+        "ghcr.io\/parkervcp\/yolks:python_3.9": "ghcr.io\/parkervcp\/yolks:python_3.9",
+        "ghcr.io\/parkervcp\/yolks:python_3.8": "ghcr.io\/parkervcp\/yolks:python_3.8",
+        "ghcr.io\/parkervcp\/yolks:python_3.7": "ghcr.io\/parkervcp\/yolks:python_3.7",
+        "ghcr.io\/parkervcp\/yolks:python_2.7": "ghcr.io\/parkervcp\/yolks:python_2.7",
+        "ghcr.io\/jewishlewish\/pybird:latest": "ghcr.io\/jewishlewish\/pybird:latest"
+    },
+    "file_denylist": [],
+    "startup": "{{STARTUP_COMMAND}}",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Python Has Successfully Booted Up\"\r\n}",
+        "logs": "{}",
+        "stop": "^C"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n# Python App Installation Script\r\n#\r\n# Server Files: \/mnt\/server\r\napt update\r\napt install -y git curl jq file unzip make gcc g++ python python-dev libtool wget\r\napt-get install -y python3-dev\r\n\r\nmkdir -p \/mnt\/server\r\ncd \/mnt\/server\r\n\r\napt-get install -y libzbar0\r\n\r\napt-get install -y libglib2.0-0=2.50.3-2 \\\r\n    libnss3=2:3.26.2-1.1+deb9u1 \\\r\n    libgconf-2-4=3.2.6-4+b1 \\\r\n    libfontconfig1=2.11.0-6.7+b1\r\n\r\npip install playwright\r\n\r\npython -m playwright install\r\n\r\npip install pyzbar\r\n\r\n\r\napt-get install -y build-essential libzbar-dev libzbar0 zbar-tools\r\napt-get install -y libicu-dev libicu-dev libtesseract-dev libleptonica-dev libcairo2-dev libpango1.0-dev libcairo2-dev tesseract-ocr tesseract-ocr-dev tesseract-ocr-script-latn\r\n\r\n\r\n\r\n\r\nexport HOME=\/mnt\/server\r\n\r\n\r\necho -e \"install complete\"\r\nexit 0",
+            "container": "python:3.8-slim",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Startup Command",
+            "description": "the command to run to start it up",
+            "env_variable": "STARTUP_COMMAND",
+            "default_value": "python3 main.py",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "nullable|string|max:400",
+            "field_type": "text"
+        }
+    ]
+}
